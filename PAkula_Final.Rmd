@@ -155,11 +155,11 @@ Above condition can be rewritten as
 
 $P(X \cap Y) = P(X)P(Y)$, condition will be true only when $X$ and $Y$ are independent.
 
-We can say that above ground living area and sale price are independent only when an increase or decrease in the area does not affect the probability of increase or decrease of the sale price of the house. We can test the condition by using the following hypothesis.
+We can say that above grade living area and sale price are independent only when an increase or decrease in the area does not affect the probability of increase or decrease of the sale price of the house. We can test the condition by using the following hypothesis.
 
-Null Hypothesis($H_0$): Sale price of the house is not influenced by above ground living area.
+Null Hypothesis($H_0$): Sale price of the house is not influenced by above grade living area.
 
-Alternative Hypothesis($H_A$): Above ground living area has significant influence on sale price of the house.
+Alternative Hypothesis($H_A$): Above grade living area has significant influence on sale price of the house.
 
 If two variables were to be independent it should satisfy the condition
 
@@ -189,7 +189,7 @@ $P(Y>y~ |~ X>x)P(X>x) = P(X>x~ \cap ~ Y>y)$
 
 = $P(Y>y~ |~ X>x) = \frac{720}{1094} = `r round(720/1094,4)*100` \%$
 
-Since $P(X>x~ |~ Y>y)P(Y>y) = P(X>x~ \cap ~ Y>y) = P(Y>y~ |~ X>x)P(X>x)$, condition is not met we reject _Null Hypothesis_($H_0$), and accept _Alternative Hypothesis_($H_A$) that above ground living area has significant influence on sale price of the house.
+Since $P(X>x~ |~ Y>y)P(Y>y) = P(X>x~ \cap ~ Y>y) = P(Y>y~ |~ X>x)P(X>x)$, condition is not met we reject _Null Hypothesis_($H_0$), and accept _Alternative Hypothesis_($H_A$) that above grade living area has significant influence on sale price of the house.
 
 ******
 
@@ -203,7 +203,7 @@ chisq.test(house.data)
 
 ```
 
-Since we have 2 variables `GrLivArea` and `SalePrice`, degrees of freedom(df) = 1, p-value = $2.2 \times 10^{-16}$ is very small compared at $0.05$ significance level, we reject _Null Hypothesis_($H_0$), and accept _Alternative Hypothesis_($H_A$) that above ground living area has significant influence on sale price of the house.
+Since we have 2 variables `GrLivArea` and `SalePrice`, degrees of freedom(df) = 1, p-value = $2.2 \times 10^{-16}$ is very small compared at $0.05$ significance level, we reject _Null Hypothesis_($H_0$), and accept _Alternative Hypothesis_($H_A$) that above grade living area has significant influence on sale price of the house.
 
 ******
 **_Problem: 2_**
@@ -277,7 +277,7 @@ bxgg <- ggplot(req.data, aes(x='', y=GrLivArea)) +
           geom_boxplot(fill = fill, colour = line, alpha = 0.7, varwidth=T, width=0.6) +
           #coord_flip() +
           scale_x_discrete(name = "") +
-          scale_y_continuous(name = "Above Ground Living Area(sq.ft.)", breaks = seq(0, max(req.data$GrLivArea) + 100, 500),
+          scale_y_continuous(name = "Above Grade Living Area(sq.ft.)", breaks = seq(0, max(req.data$GrLivArea) + 100, 500),
                               limits=c(0, max(req.data$GrLivArea) + 100)) +
           ggtitle("Boxplot") +
           stat_summary(geom="text", fun.y=quantile,
@@ -286,18 +286,18 @@ bxgg <- ggplot(req.data, aes(x='', y=GrLivArea)) +
 
 hgg <- ggplot(req.data, aes(x=GrLivArea)) +
           geom_histogram(binwidth=100, colour = line, fill = fill, aes(y=..density.., fill=..count..)) +
-          scale_x_continuous(name = "Above Ground Living Area(sq.ft.)") +
+          scale_x_continuous(name = "Above Grade Living Area(sq.ft.)") +
           stat_function(fun=dnorm, color="red",
                         args=list(mean=mean(req.data$GrLivArea), sd=sd(req.data$GrLivArea))) +
           ggtitle("Histogram")
           #geom_vline(xintercept = mean(req.data$GrLivArea), show_guide=TRUE, color="red", labels="Average") +
           #geom_vline(xintercept = median(req.data$GrLivArea), show_guide=TRUE, color="green", labels="Median")
 
-grid.arrange(bxgg, hgg, nrow = 2, top='Above Ground Living Area(sq.ft.)')
+grid.arrange(bxgg, hgg, nrow = 2, top='Above Grade Living Area(sq.ft.)')
  
 ```
 
-Histogram shows distribution of above ground living area is. Average area is `r round(mean(req.data$GrLivArea),2)` sq.ft. with standard deviation as `r round(sd(req.data$GrLivArea),2)`. It also shows `right tail`, suggesting existence of outliers to the right of the `average`. 
+Histogram shows distribution of above grade living area is. Average area is `r round(mean(req.data$GrLivArea),2)` sq.ft. with standard deviation as `r round(sd(req.data$GrLivArea),2)`. It also shows `right tail`, suggesting existence of outliers to the right of the `average`. 
 
 ```{r, echo=T, warning=F, message=F}
 kable(qarea, digits = 2, 
@@ -349,8 +349,8 @@ kable(qprice, digits = 2,
 ggplot(req.data, aes(x=GrLivArea, y=SalePrice)) +
   geom_point() +
   geom_smooth(method=lm) +
-  labs(title="Scatterplot Above Ground Living Area Vs. Sale Price",
-       x="Above Ground Living Area(sq.ft.)", y = "Sale Price(Dollars)")
+  labs(title="Scatterplot Above Grade Living Area Vs. Sale Price",
+       x="Above Grade Living Area(sq.ft.)", y = "Sale Price(Dollars)")
 ```
 
 From above boxplots, histograms and scatterplot we can notice there are some outliers and the variation amoung area and sale price is not constant. This causes a longer tail on the right side.
@@ -410,8 +410,8 @@ req.data$SalePrice_trans <- ((req.data$SalePrice^lambda) -1)/lambda
 ggplot(req.data, aes(x=GrLivArea, y=SalePrice_trans)) +
   geom_point() +
   geom_smooth(method=lm) +
-  labs(title="Scatterplot Above Ground Living Area Vs. Sale Price Transformed",
-       x="Above Ground Living Area(sq.ft.)", y = "Sale Price Transformed")
+  labs(title="Scatterplot Above Grade Living Area Vs. Sale Price Transformed",
+       x="Above Grade Living Area(sq.ft.)", y = "Sale Price Transformed")
 ```
 
 ```{r, echo=T, warning=F, message=F}
@@ -456,7 +456,7 @@ Looking at the output all the variables are positively correlated.
 
 Correlation between `TotalBsmtSF` and `SalePrice` is $0.61$. It explains bigger basement area will result in the better sale price. Square value of the coefficient is $`r 0.61^2`$. It means $`r (0.61^2) * 100` \%$ percent of the variance in the sale price of a house can be explained by the total area of the basement.
 
-Correlation between `GrLivArea` and `SalePrice` is $0.71$. It explains bigger living area will result in the better sale price. Square value of the coefficient is $`r 0.71^2`$. It means $`r (0.71^2) * 100` \%$ percent of the variance in the sale price of a house can be explained by the total above ground living area.
+Correlation between `GrLivArea` and `SalePrice` is $0.71$. It explains bigger living area will result in the better sale price. Square value of the coefficient is $`r 0.71^2`$. It means $`r (0.71^2) * 100` \%$ percent of the variance in the sale price of a house can be explained by the total above grade living area.
 
 ******
 ####Precision Matrix
