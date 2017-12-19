@@ -151,6 +151,7 @@ library(grid)
 library(gridExtra)
 library(MASS)
 library(data.table)
+library(RCurl)
 options(scipen=8)
 set.seed(0305)</code></pre>
 <p><strong><em>Problem: 1</em></strong></p>
@@ -163,8 +164,12 @@ set.seed(0305)</code></pre>
 <p>To answer the above question I will using data from <code>GrLivArea</code> column, according to documentation it is described as <em>Above grade (ground) living area square feet</em>. This column will be <code>X</code>, independent variable and <code>Y</code> would be <code>SalePrice</code>.</p>
 <p>Load data from <em>train.csv</em>. It is downloaded from <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques"><em>kaggle.com.</em></a></p>
 <pre class="r"><code>#Load data
-kaggle.data &lt;- read.csv(&quot;D:\\CUNY\\605\\FinalProject\\train.csv&quot;, header=T)
-kaggle.data.test &lt;- read.csv(&quot;D:\\CUNY\\605\\FinalProject\\test.csv&quot;, header=T)
+#kaggle.data &lt;- read.csv(&quot;D:\\CUNY\\605\\FinalProject\\train.csv&quot;, header=T)
+#kaggle.data.test &lt;- read.csv(&quot;D:\\CUNY\\605\\FinalProject\\test.csv&quot;, header=T)
+
+kaggle.data &lt;- read.csv(text=getURL(&quot;https://raw.githubusercontent.com/akulapa/Akula-Data605-Final/master/train.csv&quot;), header=T)
+kaggle.data.test &lt;- read.csv(text=getURL(&quot;https://raw.githubusercontent.com/akulapa/Akula-Data605-Final/master/test.csv&quot;), header=T)
+
 #Get required data
 reqCols &lt;- c('GrLivArea', 'SalePrice')
 req.data &lt;- kaggle.data[reqCols]

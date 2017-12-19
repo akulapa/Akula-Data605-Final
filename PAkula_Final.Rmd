@@ -16,6 +16,7 @@ library(grid)
 library(gridExtra)
 library(MASS)
 library(data.table)
+library(RCurl)
 options(scipen=8)
 set.seed(0305)
 ```
@@ -34,8 +35,12 @@ Load data from _train.csv_. It is downloaded from [*kaggle.com.*](https://www.ka
 
 ```{r, echo=T, warning=F, message=F}
 #Load data
-kaggle.data <- read.csv("D:\\CUNY\\605\\FinalProject\\train.csv", header=T)
-kaggle.data.test <- read.csv("D:\\CUNY\\605\\FinalProject\\test.csv", header=T)
+#kaggle.data <- read.csv("D:\\CUNY\\605\\FinalProject\\train.csv", header=T)
+#kaggle.data.test <- read.csv("D:\\CUNY\\605\\FinalProject\\test.csv", header=T)
+
+kaggle.data <- read.csv(text=getURL("https://raw.githubusercontent.com/akulapa/Akula-Data605-Final/master/train.csv"), header=T)
+kaggle.data.test <- read.csv(text=getURL("https://raw.githubusercontent.com/akulapa/Akula-Data605-Final/master/test.csv"), header=T)
+
 #Get required data
 reqCols <- c('GrLivArea', 'SalePrice')
 req.data <- kaggle.data[reqCols]
